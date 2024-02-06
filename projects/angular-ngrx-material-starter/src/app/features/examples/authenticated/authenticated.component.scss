@@ -1,4 +1,95 @@
-.main-heading {
-  text-transform: uppercase;
-  margin: 0 0 20px 0;
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.example-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container {
+  margin-top: 20px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: green;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.col i {
+  margin-right: 5px;
+}
+
+.userDetails {
+  margin-top: 20px;
+}
+
+.mat-radio-group {
+  margin-right: 20px;
+}
+
+.mat-radio-button {
+  margin-right: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  /* Adjust margin as needed */
+}
+
+.mat-form-field {
+  width: 100%;
+  /* Ensure the input field takes up the full width */
+}
+
+.mat-input-element {
+  padding-right: 36px;
+  /* Adjust padding to accommodate the button */
+}
+
+/* Password toggle button styling */
+.mat-icon-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  /* Adjust the button's position from the right */
+  transform: translateY(-50%);
+  background-color: transparent;
+  /* Make the background transparent */
+  color: #999;
+  /* Set the color for the button */
+  padding: 0;
+  /* Remove padding */
+}
+
+.mat-icon-button:hover {
+  background-color: transparent;
+  /* Set the background color on hover */
+}
+
+.mat-icon-button .mat-icon {
+  font-size: 24px;
+  /* Adjust the icon size */
 }

@@ -1,13 +1,132 @@
-<div class="container" rtl>
-  <div class="row">
-    <div class="col-12">
-      <h1 class="main-heading">{{ 'anms.examples.auth.title' | translate }}</h1>
-      <p [ngClass]="routeAnimationsElements">
-        {{ 'anms.examples.auth.description1' | translate }}
-      </p>
-      <p [ngClass]="routeAnimationsElements">
-        {{ 'anms.examples.auth.description2' | translate }}
-      </p>
+<div class="content">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <form [formGroup]="myForm" class="example-form">
+    <div class="container" rtl>
+      <mat-form-field class="example-full-width">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" placeholder="..." value="">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" placeholder="..." value="">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="..." value="">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" placeholder="..." value="">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>City</mat-label>
+        <input type="text" formControlName="city" placeholder="Pick one" aria-label="Number" matInput
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-radio-group aria-label="Select an option" formControlName="gender">
+        <mat-radio-button value="1">Male</mat-radio-button>
+        <mat-radio-button value="2">Female</mat-radio-button>
+        <mat-radio-button value="3">I would prefer not to answer</mat-radio-button>
+      </mat-radio-group>
     </div>
-  </div>
+    <div class="example-container">
+      <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" required>
+      </mat-form-field>
+      <label class="text-danger" *ngIf="myForm.controls['email'].hasError('required')">
+        The email is mandatory.
+      </label>
+      <label class="text-danger" *ngIf="myForm.controls['email'].hasError('email')">
+        Invalid email.
+      </label>
+    </div>
+    <form [formGroup]="myForm">
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <label class="col"
+        [ngClass]="myForm.controls['password'].hasError('required') || myForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">
+          {{ myForm.controls['password'].hasError('required') ||
+          myForm.controls['password'].hasError('minlength') ? 'cancel' :
+          'check_circle' }}
+        </i>
+        Must be at least 8 characters.
+      </label>
+
+      <label class="col"
+        [ngClass]="myForm.controls['password'].hasError('required') || myForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">
+          {{ myForm.controls['password'].hasError('required') ||
+          myForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+          'check_circle' }}
+        </i>
+        Must contain at least 1 number.
+      </label>
+
+      <label class="col"
+        [ngClass]="myForm.controls['password'].hasError('required') || myForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">
+          {{ myForm.controls['password'].hasError('required') ||
+          myForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+          'check_circle' }}
+        </i>
+        Must contain at least 1 in Capital Case.
+      </label>
+
+      <label class="col"
+        [ngClass]="myForm.controls['password'].hasError('required') || myForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+        <i class="material-icons">
+          {{ myForm.controls['password'].hasError('required') ||
+          myForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+          'check_circle' }}
+        </i>
+        Must contain at least 1 Letter in Small Case.
+      </label>
+
+      <label class="col"
+        [ngClass]="myForm.controls['password'].hasError('required') || myForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+        <i class="material-icons">
+          {{ myForm.controls['password'].hasError('required') ||
+          myForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' :
+          'check_circle' }}
+        </i>
+        Must contain at least 1 Special Character.
+      </label>
+    </form>
+
+
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Confirm password</mat-label>
+      <input matInput [type]="'password'" formControlName="confirmPassword">
+    </mat-form-field>
+    <label class="text-danger" *ngIf="myForm.get('confirmPassword')?.errors?.passwordMismatch">
+      Password do not match
+    </label>
+
+
+    <div class="button-container">
+      <button mat-raised-button color="primary">Save</button>
+      <button mat-raised-button disabled>Submit</button>
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+    </div>
+
+    <div class="userDetails">
+    </div>
+  </form>
 </div>
